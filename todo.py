@@ -22,6 +22,11 @@ class App(object):
     def stay_running(self):
         self.screen.mainloop()
 
+    def list_box(self, x, y, width, height):
+        global lb
+        lb = tk.Listbox(self.screen)
+        lb.place(x=x, y=y, width=width, height=height)
+
 
     def entry_bar(self, x, y, width=180):
         global eb
@@ -30,13 +35,16 @@ class App(object):
     
     def get_entry(self):
         global eb
-        return eb.get()
-
-
-    def list_box(self, x, y, width, height):
+        content =  eb.get()
+        eb.delete(0, "end")
+        return content
+    
+    def remove_last(self):
         global lb
-        lb = tk.Listbox(self.screen)
-        lb.place(x=x, y=y, width=width, height=height)
+        lb.delete("end")
+
+
+
     
     def add_to_list_box(self, inserting):
         global lb
@@ -75,7 +83,7 @@ todo.but(dark_yellow, 160, 75, "Add Task", add_task)
 # Remove task
 
 def remove_task():
-    pass
+    todo.remove_last()
 
 todo.but(dark_yellow, 260, 75, "Rmv Task", remove_task)
 
