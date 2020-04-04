@@ -44,13 +44,13 @@ class App(object):
     def remove_last(cls):
         global lb
         lb.delete("end")
-
-
-
     
-    def add_to_list_box(self, inserting):
+    @classmethod
+    def remove_all(cls):
         global lb
-        lb.insert("end", inserting)
+        lb.delete(0, "end")
+
+
     
 
     def but(self, background, x, width ,text, cmd=None, y=85):
@@ -75,17 +75,9 @@ todo.list_box(10, 140, 480, 340)
 
 # Add task
 
-def add_task():
-    getting = todo.get_entry()
-    todo.add_to_list_box(getting)
-
-
 todo.but(dark_yellow, 160, 75, "Add Task", App.get_entry)
 
 # Remove task
-
-# def remove_task():
-#     todo.remove_last()
 
 todo.but(dark_yellow, 260, 75, "Rmv Task", App.remove_last)
 
@@ -94,7 +86,7 @@ todo.but(dark_yellow, 260, 75, "Rmv Task", App.remove_last)
 def remove_all():
     pass
 
-todo.but(dark_yellow, 360, 75, "Rmv all", remove_all)
+todo.but(dark_yellow, 360, 75, "Rmv all", App.remove_all)
 
 # order
 def order():
