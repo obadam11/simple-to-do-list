@@ -33,13 +33,15 @@ class App(object):
         eb = tk.Entry(self.screen, borderwidth=5)
         eb.place(x=x, y=y, width=width)
     
-    def get_entry(self):
-        global eb
+    @classmethod
+    def get_entry(cls):
+        global eb, lb
         content =  eb.get()
         eb.delete(0, "end")
-        return content
-    
-    def remove_last(self):
+        lb.insert("end", content)
+
+    @classmethod
+    def remove_last(cls):
         global lb
         lb.delete("end")
 
@@ -78,14 +80,14 @@ def add_task():
     todo.add_to_list_box(getting)
 
 
-todo.but(dark_yellow, 160, 75, "Add Task", add_task)
+todo.but(dark_yellow, 160, 75, "Add Task", App.get_entry)
 
 # Remove task
 
-def remove_task():
-    todo.remove_last()
+# def remove_task():
+#     todo.remove_last()
 
-todo.but(dark_yellow, 260, 75, "Rmv Task", remove_task)
+todo.but(dark_yellow, 260, 75, "Rmv Task", App.remove_last)
 
 # Remove all
 
