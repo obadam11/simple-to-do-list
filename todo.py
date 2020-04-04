@@ -1,5 +1,6 @@
 import tkinter as tk
 import datetime
+from tkinter import messagebox
 
 
 yellow = "#F7FF45"
@@ -37,8 +38,11 @@ class App(object):
     def get_entry(cls):
         global eb, lb
         content =  eb.get()
-        eb.delete(0, "end")
-        lb.insert("end", content)
+        if content == True:
+            eb.delete(0, "end")
+            lb.insert("end", content)
+        else:
+            messagebox.showinfo("Error", "Please enter something")
 
     @classmethod
     def remove_last(cls):
@@ -49,6 +53,13 @@ class App(object):
     def remove_all(cls):
         global lb
         lb.delete(0, "end")
+
+    @classmethod
+    def most_important(cls):
+        global lb, eb
+        content = f"{eb.get()}                         IMPORTANT"
+        lb.insert("end", content)
+        eb.delete(0, "end")
 
 
     
@@ -79,20 +90,17 @@ todo.but(dark_yellow, 160, 75, "Add Task", App.get_entry)
 
 # Remove task
 
-todo.but(dark_yellow, 260, 75, "Rmv Task", App.remove_last)
+todo.but(dark_yellow, 260, 75, "Task Done", App.remove_last)
 
 # Remove all
 
-def remove_all():
-    pass
 
 todo.but(dark_yellow, 360, 75, "Rmv all", App.remove_all)
 
 # order
-def order():
-    pass
 
-todo.but(dark_yellow, 60, 75, "order", order)
+
+todo.but(dark_yellow, 60, 75, "important", App.most_important)
 
 
 
