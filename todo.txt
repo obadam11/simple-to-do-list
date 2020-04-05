@@ -1,3 +1,3 @@
-Make a cup of coffe.
-Read some books.
-practice Git and Github.
+Learn Git and Github
+Make coffe
+Read more books                         IMPORTANT

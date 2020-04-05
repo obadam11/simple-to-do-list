@@ -34,6 +34,7 @@ class App(object):
         eb = tk.Entry(self.screen, borderwidth=5)
         eb.place(x=x, y=y, width=width)
     
+    
     @classmethod
     def get_entry(cls):
         global eb, lb
@@ -44,6 +45,11 @@ class App(object):
             lb.insert("end", content)
         else:
             messagebox.showinfo("Error", "Please enter something")
+        try:
+            with open("todo.txt", "a") as f_write:
+                f_write.write(f"{content}\n")
+        except FileNotFoundError:
+            print("File not Found")
 
     @classmethod
     def remove_last(cls):
@@ -61,6 +67,13 @@ class App(object):
         content = f"{eb.get()}                         IMPORTANT"
         lb.insert(0, content)
         eb.delete(0, "end")
+
+        try:
+            with open("todo.txt", "a") as f_object:
+                f_object.write(content)
+        except FileNotFoundError:
+            print("This file is not found")
+            
 
 
     
