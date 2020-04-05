@@ -38,7 +38,8 @@ class App(object):
     def get_entry(cls):
         global eb, lb
         content =  eb.get()
-        if content == True:
+        print(content)
+        if content:
             eb.delete(0, "end")
             lb.insert("end", content)
         else:
@@ -58,7 +59,7 @@ class App(object):
     def most_important(cls):
         global lb, eb
         content = f"{eb.get()}                         IMPORTANT"
-        lb.insert("end", content)
+        lb.insert(0, content)
         eb.delete(0, "end")
 
 
@@ -75,6 +76,18 @@ class App(object):
     def on_screen(self, x, y, txt, background, foreground="black"):
         t = tk.Label(self.screen, text=txt, bg=background, fg=foreground, font=("Courier", 14, "bold"))
         t.place(x=x, y=y)
+    
+    def present_file(self):
+        global lb
+        try:
+            with open("todo.txt") as f_read:
+                lines = f_read.readlines()
+        except FileNotFoundError:
+            print("File not found")
+        else:
+            for line in lines:
+                lb.insert("end", line)
+
 
 
 
@@ -83,6 +96,7 @@ todo.draw("To-Do List", color=yellow)
 todo.on_screen(170, 10, "To Do list app", yellow)
 todo.entry_bar(160, 50)
 todo.list_box(10, 140, 480, 340)
+todo.present_file()
 
 # Add task
 
